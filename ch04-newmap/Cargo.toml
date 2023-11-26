@@ -7,5 +7,4 @@ edition = "2021"
 
 [dependencies]
 bracket-lib = { git = "https://github.com/amethyst/bracket-lib.git" }
-specs = "0.20.0"
-specs-derive = "0.4.1"
+specs = { version = "0.20.0", features = ["specs-derive"] }

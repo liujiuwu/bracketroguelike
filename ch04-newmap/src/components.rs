@@ -1,6 +1,5 @@
 use bracket_lib::prelude::*;
-use specs::prelude::*;
-use specs_derive::*;
+use specs::{Component, prelude::*};
 
 #[derive(Component)]
 pub struct Position {

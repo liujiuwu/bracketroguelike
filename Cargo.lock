@@ -282,7 +282,6 @@ version = "0.1.0"
 dependencies = [
  "bracket-lib",
  "specs",
- "specs-derive",
 ]
 
 [[package]]
@@ -291,7 +290,6 @@ version = "0.1.0"
 dependencies = [
  "bracket-lib",
  "specs",
- "specs-derive",
 ]
 
 [[package]]
@@ -300,7 +298,6 @@ version = "0.1.0"
 dependencies = [
  "bracket-lib",
  "specs",
- "specs-derive",
 ]
 
 [[package]]
@@ -309,7 +306,6 @@ version = "0.1.0"
 dependencies = [
  "bracket-lib",
  "specs",
- "specs-derive",
 ]
 
 [[package]]
@@ -1754,6 +1750,7 @@ dependencies = [
  "rayon",
  "shred",
  "shrev",
+ "specs-derive",
  "tuple_utils",
 ]
 

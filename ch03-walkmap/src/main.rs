@@ -1,6 +1,5 @@
 use bracket_lib::prelude::*;
-use specs::prelude::*;
-use specs_derive::*;
+use specs::{Component, prelude::*};
 use std::cmp::{max, min};
 
 #[derive(Component)]

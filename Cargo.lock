@@ -309,6 +309,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "ch05-fov"
+version = "0.1.0"
+dependencies = [
+ "bracket-lib",
+ "specs",
+]
+
+[[package]]
 name = "cmake"
 version = "0.1.50"
 source = "registry+https://github.com/rust-lang/crates.io-index"

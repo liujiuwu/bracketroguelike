@@ -1,0 +1,14 @@
+[package]
+name = "bracketroguelike"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bracket-lib = { git = "https://github.com/amethyst/bracket-lib.git" }
+specs = "0.20.0"
+specs-derive = "0.4.1"
+
+[workspace]
+members = ["ch01-hellobracket", "ch02-helloecs", "ch03-walkmap", "ch04-newmap"]

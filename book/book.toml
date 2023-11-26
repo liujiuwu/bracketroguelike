@@ -1,0 +1,6 @@
+[book]
+authors = ["jiuwu"]
+language = "en"
+multilingual = false
+src = "src"
+title = "bracket for roguelike game"

@@ -20,7 +20,7 @@ cd ${PARENT_DIR} || exit
 
 rm -rf target/wasm
 
-cargo build --release --target wasm32-unknown-unknown --all
+cargo clean && cargo build --release --target wasm32-unknown-unknown --all
 chapters=($(find roguelike -type d -maxdepth 1 -name "ch*"  -exec sh -c 'echo ${0#roguelike/}' {} \;))
 for chapter in "${chapters[@]}"; do
     Stage ${chapter}

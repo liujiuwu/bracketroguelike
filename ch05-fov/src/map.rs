@@ -1,7 +1,9 @@
-use bracket_lib::prelude::*;
-use super::{Player, Rect, Viewshed};
 use std::cmp::{max, min};
-use specs::{World, prelude::*};
+
+use bracket_lib::prelude::*;
+use specs::World;
+
+use super::Rect;
 
 #[derive(PartialEq, Copy, Clone)]
 pub enum TileType {

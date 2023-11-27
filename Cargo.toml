@@ -11,4 +11,4 @@ specs = "0.20.0"
 specs-derive = "0.4.1"
 
 [workspace]
-members = ["ch01-hellobracket", "ch02-helloecs", "ch03-walkmap", "ch04-newmap","ch05-fov"]
+members = ["ch01-helloworld", "ch02-helloecs", "ch03-walkmap", "ch04-newmap","ch05-fov"]

@@ -1,9 +1,0 @@
-{
-    "rust-analyzer.linkedProjects": [
-        "./ch03-walkmap/Cargo.toml",
-        "./ch03-walkmap/Cargo.toml",
-        "./ch03-walkmap/Cargo.toml",
-        "./ch03-walkmap/Cargo.toml",
-        "./ch03-walkmap/Cargo.toml"
-    ]
-}

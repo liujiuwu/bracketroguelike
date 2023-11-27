@@ -1,10 +1,6 @@
-[package]
-name = "bracketroguelike"
-version = "0.1.0"
-edition = "2021"
-
 [workspace]
-members = ["ch*"]
+resolver = "2"
+members = ["roguelike/*"]
 
 [workspace.dependencies]
 bracket-lib = { git = "https://github.com/amethyst/bracket-lib.git" }

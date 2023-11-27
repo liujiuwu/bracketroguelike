@@ -198,11 +198,6 @@ dependencies = [
 [[package]]
 name = "bracketroguelike"
 version = "0.1.0"
-dependencies = [
- "bracket-lib",
- "specs",
- "specs-derive",
-]
 
 [[package]]
 name = "bumpalo"
@@ -277,7 +272,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "ch01-hellobracket"
+name = "ch01-helloworld"
 version = "0.1.0"
 dependencies = [
  "bracket-lib",

@@ -3,7 +3,7 @@
 ```shell
 rustup target add wasm32-unknown-unknown
 ```
-# 2.安装 wasm-bindgen 工具
+# 2.安装 wasm-bindgen
 ```shell
 cargo install wasm-bindgen-cli
 ```
@@ -16,7 +16,7 @@ cargo install wasm-bindgen-cli
 此脚本会在target/wasm目录下生成WebAssembly文件。
 
 
-# 4.安装 miniserver 工具
+# 4.安装 miniserver
 ```shell
 cargo install miniserve
 ```

@@ -73,8 +73,7 @@ impl GameState for State {
 struct LeftWalker {}
 
 impl<'a> System<'a> for LeftWalker {
-    type SystemData = (ReadStorage<'a, LeftMover>,
-                       WriteStorage<'a, Position>);
+    type SystemData = (ReadStorage<'a, LeftMover>, WriteStorage<'a, Position>);
 
     fn run(&mut self, (lefty, mut pos): Self::SystemData) {
         for (_lefty, pos) in (&lefty, &mut pos).join() {
@@ -108,8 +107,7 @@ fn main() -> BError {
     gs.ecs.register::<LeftMover>();
     gs.ecs.register::<Player>();
 
-    gs.ecs
-        .create_entity()
+    gs.ecs.create_entity()
         .with(Position { x: 40, y: 25 })
         .with(Renderable {
             glyph: to_cp437('@'),
@@ -120,8 +118,7 @@ fn main() -> BError {
         .build();
 
     for i in 0..10 {
-        gs.ecs
-            .create_entity()
+        gs.ecs.create_entity()
             .with(Position { x: i * 7, y: 20 })
             .with(Renderable {
                 glyph: to_cp437('☺'),

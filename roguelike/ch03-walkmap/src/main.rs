@@ -2,6 +2,9 @@ use bracket_lib::prelude::*;
 use specs::{Component, prelude::*};
 use std::cmp::{max, min};
 
+const WIDTH: usize = 80;
+const HEIGHT: usize = 50;
+
 #[derive(Component)]
 struct Position {
     x: i32,
@@ -24,19 +27,36 @@ enum TileType {
     Floor,
 }
 
-pub fn xy_idx(x: i32, y: i32) -> usize {
-    (y as usize * 80) + x as usize
+fn xy_idx(x: i32, y: i32) -> usize {
+    (y as usize * WIDTH) + x as usize
+}
+
+fn idx_xy(idx: usize) -> (i32, i32) {
+    let x = (idx % WIDTH) as i32;
+    let y = (idx / WIDTH) as i32;
+    (x, y)
+}
+
+
+struct State {
+    ecs: World,
+}
+
+impl State {
+    fn run_systems(&mut self) {
+        self.ecs.maintain();
+    }
 }
 
 fn new_map() -> Vec<TileType> {
-    let mut map = vec![TileType::Floor; 80 * 50];
+    let mut map = vec![TileType::Floor; WIDTH * HEIGHT];
 
     // Make the boundaries walls
-    for x in 0..80 {
+    for x in 0..WIDTH as i32 {
         map[xy_idx(x, 0)] = TileType::Wall;
         map[xy_idx(x, 49)] = TileType::Wall;
     }
-    for y in 0..50 {
+    for y in 0..HEIGHT as i32 {
         map[xy_idx(0, y)] = TileType::Wall;
         map[xy_idx(79, y)] = TileType::Wall;
     }
@@ -52,10 +72,6 @@ fn new_map() -> Vec<TileType> {
     }
 
     map
-}
-
-struct State {
-    ecs: World,
 }
 
 fn try_move_player(delta_x: i32, delta_y: i32, ecs: &mut World) {
@@ -104,60 +120,28 @@ impl GameState for State {
     }
 }
 
-impl State {
-    fn run_systems(&mut self) {
-        self.ecs.maintain();
-    }
-}
 
 fn draw_map(map: &[TileType], ctx: &mut BTerm) {
-    let mut y = 0;
-    let mut x = 0;
-    for tile in map.iter() {
-        // Render a tile depending upon the tile type
+    for (idx, tile) in map.iter().enumerate() {
+        let (x, y) = idx_xy(idx);
         match tile {
-            TileType::Floor => {
-                ctx.set(
-                    x,
-                    y,
-                    RGB::from_f32(0.5, 0.5, 0.5),
-                    RGB::from_f32(0., 0., 0.),
-                    to_cp437('.'),
-                );
-            }
-            TileType::Wall => {
-                ctx.set(
-                    x,
-                    y,
-                    RGB::from_f32(0.0, 1.0, 0.0),
-                    RGB::from_f32(0., 0., 0.),
-                    to_cp437('#'),
-                );
-            }
-        }
-
-        // Move the coordinates
-        x += 1;
-        if x > 79 {
-            x = 0;
-            y += 1;
+            TileType::Floor => ctx.set(x, y, GRAY30, BLACK, to_cp437('.')),
+            TileType::Wall => ctx.set(x, y, GREEN, BLACK, to_cp437('#'))
         }
     }
 }
 
 fn main() -> BError {
-    let ctx = BTermBuilder::simple80x50().build()?;
+    let ctx = BTermBuilder::simple80x50().with_title("Walk map").build()?;
 
     let mut gs = State { ecs: World::new() };
-
     gs.ecs.register::<Position>();
     gs.ecs.register::<Renderable>();
     gs.ecs.register::<Player>();
 
     gs.ecs.insert(new_map());
 
-    gs.ecs
-        .create_entity()
+    gs.ecs.create_entity()
         .with(Position { x: 40, y: 25 })
         .with(Renderable {
             glyph: to_cp437('@'),

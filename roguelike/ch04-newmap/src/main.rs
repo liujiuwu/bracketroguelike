@@ -55,8 +55,7 @@ fn main() -> BError {
     gs.ecs.insert(map);
     let (player_x, player_y) = rooms[0].center();
 
-    gs.ecs
-        .create_entity()
+    gs.ecs.create_entity()
         .with(Position { x: player_x, y: player_y })
         .with(Renderable {
             glyph: to_cp437('@'),

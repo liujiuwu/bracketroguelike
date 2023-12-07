@@ -12,6 +12,13 @@ pub fn xy_idx(x: i32, y: i32) -> usize {
     (y as usize * 80) + x as usize
 }
 
+pub fn idx_xy(idx: usize) -> (i32, i32) {
+    let x = (idx % 80) as i32;
+    let y = (idx / 80) as i32;
+    (x, y)
+}
+
+
 pub fn new_map_rooms_and_corridors() -> (Vec<Rect>, Vec<TileType>) {
     let mut map = vec![TileType::Wall; 80*50];
 
@@ -65,36 +72,11 @@ fn apply_room_to_map(room : &Rect, map: &mut [TileType]) {
 }
 
 pub fn draw_map(map: &[TileType], ctx: &mut BTerm) {
-    let mut y = 0;
-    let mut x = 0;
-    for tile in map.iter() {
-        // Render a tile depending upon the tile type
+    for (idx, tile) in map.iter().enumerate() {
+        let (x, y) = idx_xy(idx);
         match tile {
-            TileType::Floor => {
-                ctx.set(
-                    x,
-                    y,
-                    RGB::from_f32(0.5, 0.5, 0.5),
-                    RGB::from_f32(0., 0., 0.),
-                    to_cp437('.'),
-                );
-            }
-            TileType::Wall => {
-                ctx.set(
-                    x,
-                    y,
-                    RGB::from_f32(0.0, 1.0, 0.0),
-                    RGB::from_f32(0., 0., 0.),
-                    to_cp437('#'),
-                );
-            }
-        }
-
-        // Move the coordinates
-        x += 1;
-        if x > 79 {
-            x = 0;
-            y += 1;
+            TileType::Floor => ctx.set(x, y, GRAY30, BLACK, to_cp437('.')),
+            TileType::Wall => ctx.set(x, y, GREEN, BLACK, to_cp437('#'))
         }
     }
 }

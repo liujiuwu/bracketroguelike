@@ -1,8 +1,0 @@
-[package]
-name = "ch05-fov"
-version = "0.1.0"
-edition = "2021"
-
-[dependencies]
-bracket-lib = { workspace = true }
-specs = { workspace = true}

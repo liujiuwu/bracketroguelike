@@ -15,4 +15,4 @@ pub struct Renderable {
 }
 
 #[derive(Component, Debug)]
-pub struct Player {}
+pub struct Player;

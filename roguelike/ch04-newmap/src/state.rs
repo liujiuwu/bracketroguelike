@@ -1,6 +1,6 @@
 use bracket_lib::prelude::*;
 use specs::prelude::*;
-use super::*;
+use super::prelude::*;
 
 pub struct State {
     pub ecs: World,

@@ -1,6 +1,6 @@
 use bracket_lib::prelude::*;
 use specs::prelude::*;
-use roguelike::*;
+use roguelike::prelude::*;
 
 fn main() -> BError {
     let ctx = BTermBuilder::simple80x50().with_title("Walk new map").build()?;

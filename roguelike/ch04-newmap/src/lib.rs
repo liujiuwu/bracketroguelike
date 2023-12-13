@@ -3,7 +3,9 @@ mod map;
 mod state;
 mod player;
 
-pub use components::*;
-pub use map::*;
-pub use player::*;
-pub use state::*;
+pub mod prelude {
+    pub use crate::components::*;
+    pub use crate::map::*;
+    pub use crate::player::*;
+    pub use crate::state::*;
+}

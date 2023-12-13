@@ -1,7 +1,7 @@
 use bracket_lib::prelude::*;
 use specs::prelude::*;
 use std::cmp::{max, min};
-use super::*;
+use super::prelude::*;
 
 
 pub fn try_move_player(delta_x: i32, delta_y: i32, ecs: &mut World) {

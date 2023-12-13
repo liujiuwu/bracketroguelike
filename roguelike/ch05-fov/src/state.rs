@@ -1,6 +1,6 @@
 use bracket_lib::prelude::*;
 use specs::prelude::*;
-use super::*;
+use super::prelude::*;
 
 pub struct State {
     pub ecs: World,
@@ -20,6 +20,11 @@ impl GameState for State {
         for (pos, render) in (&positions, &renderables).join() {
             ctx.set(pos.x, pos.y, render.fg, render.bg, render.glyph);
         }
+
+        ctx.set_active_console(2);
+        ctx.cls();
+        ctx.set_translation_mode(2, CharacterTranslationMode::Unicode);
+        ctx.print_centered(1, "Rust地下城与勇士");
     }
 }
 

@@ -1,22 +1,26 @@
 use bracket_lib::prelude::*;
 use specs::prelude::*;
-use roguelike::*;
+use roguelike::prelude::*;
 
 const WIDTH: i32 = 80;
 const HEIGHT: i32 = 50;
 
-embedded_resource!(TILE_FONT, "../resources/sprite.png");
+embedded_resource!(TILE_FONT1, "../resources/sprite.png");
+embedded_resource!(TILE_FONT2, "../resources/unicode_16x16.png");
 
 fn main() -> BError {
-    link_resource!(TILE_FONT, "resources/sprite.png");
+    link_resource!(TILE_FONT1, "resources/sprite.png");
+    link_resource!(TILE_FONT2, "resources/unicode_16x16.png");
 
     let ctx = BTermBuilder::new()
         .with_title("Walk fov")
         .with_dimensions(WIDTH, HEIGHT)
         .with_tile_dimensions(16u32, 16u32)
         .with_font("sprite.png", 16u32, 16u32)
+        .with_font("unicode_16x16.png", 16u32, 16u32)
         .with_sparse_console_no_bg(WIDTH, HEIGHT, "sprite.png")
         .with_sparse_console_no_bg(WIDTH, HEIGHT, "sprite.png")
+        .with_sparse_console_no_bg(WIDTH, HEIGHT, "unicode_16x16.png")
         .build()?;
 
     let mut gs = State { ecs: World::new() };

@@ -1,6 +1,6 @@
 use bracket_lib::prelude::*;
 use specs::prelude::*;
-use super::{Viewshed, Position, Map, Player};
+use super::prelude::{Viewshed, Position, Map, Player};
 
 pub struct VisibilitySystem {}
 

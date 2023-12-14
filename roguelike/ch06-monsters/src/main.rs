@@ -7,7 +7,8 @@ const HEIGHT: i32 = 50;
 
 fn main() -> BError {
     let ctx = BTermBuilder::simple80x50()
-        .with_title("Walk fov simple")
+        .with_tile_dimensions(16,16)
+        .with_title("Walk monster")
         .build()?;
 
     let mut gs = State {

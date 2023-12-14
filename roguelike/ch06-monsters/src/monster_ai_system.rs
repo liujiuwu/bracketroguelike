@@ -12,7 +12,7 @@ impl<'a> System<'a> for MonsterAI {
 
         for (viewshed,_monster,name) in (&viewshed, &monster,&name).join() {
             if viewshed.visible_tiles.contains(&*player_pos) {
-                log(&format!("{} shouts insults", name.name));
+                log(&format!("{} 看见你啦！！", name.name));
             }
         }
     }

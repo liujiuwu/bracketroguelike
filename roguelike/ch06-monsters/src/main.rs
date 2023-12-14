@@ -7,7 +7,7 @@ const HEIGHT: i32 = 50;
 
 fn main() -> BError {
     let ctx = BTermBuilder::simple80x50()
-        .with_tile_dimensions(16,16)
+        .with_tile_dimensions(16, 16)
         .with_title("Walk monster")
         .build()?;
 
@@ -26,12 +26,12 @@ fn main() -> BError {
     let player_center = map.rooms[0].center();
     let mut rng = RandomNumberGenerator::new();
 
-    for (id,room) in map.rooms.iter().skip(1).enumerate() {
+    for (id, room) in map.rooms.iter().skip(1).enumerate() {
         let pos = room.center();
         let roll = rng.roll_dice(1, 2);
         let (glyph, name) = match roll {
-            1 => (to_cp437('g'), "Goblin".to_string()),
-            _ => (to_cp437('o'), "Orc".to_string())
+            1 => (to_cp437('g'), "小G".to_string()),
+            _ => (to_cp437('o'), "小O".to_string())
         };
 
         gs.ecs.create_entity()
@@ -39,7 +39,7 @@ fn main() -> BError {
             .with(Renderable { glyph, fg: RGB::named(RED), bg: RGB::named(BLACK) })
             .with(Viewshed { visible_tiles: Vec::new(), range: 8, dirty: true })
             .with(Monster {})
-            .with(Name { name: format!("{} #{}", &name, id) })
+            .with(Name { name: format!("Room{}_{}", id, &name) })
             .build();
     }
 
@@ -49,7 +49,7 @@ fn main() -> BError {
         .with(Renderable { glyph: to_cp437('@'), fg: RGB::named(WHITE), bg: RGB::named(BLACK) })
         .with(Viewshed { visible_tiles: Vec::new(), range: 8, dirty: true })
         .with(Player {})
-        .with(Name{name: "Player".to_string() })
+        .with(Name { name: "Player".to_string() })
         .build();
 
     gs.ecs.insert(map);

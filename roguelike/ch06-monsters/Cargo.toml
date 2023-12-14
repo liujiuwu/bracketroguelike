@@ -1,0 +1,11 @@
+[package]
+name = "ch06-monsters"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "roguelike"
+
+[dependencies]
+bracket-lib = { workspace = true }
+specs = { workspace = true }

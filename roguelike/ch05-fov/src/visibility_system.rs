@@ -18,8 +18,7 @@ impl<'a> System<'a> for VisibilitySystem {
                 viewshed.visible_tiles.retain(|p| p.x >= 0 && p.x < map.width && p.y >= 0 && p.y < map.height);
 
                 // If this is the player, reveal what they can see
-                let _p: Option<&Player> = player.get(ent);
-                if let Some(_p) = _p {
+                if player.get(ent).is_some() {
                     for t in map.visible_tiles.iter_mut() { *t = false };
                     for vis in viewshed.visible_tiles.iter() {
                         let idx = map.point2d_to_index(*vis);

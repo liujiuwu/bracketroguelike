@@ -12,8 +12,7 @@ fn main() -> BError {
         .build()?;
 
     let mut gs = State {
-        ecs: World::new(),
-        runstate: RunState::Running,
+        ecs: World::new()
     };
     gs.ecs.register::<Position>();
     gs.ecs.register::<Renderable>();
@@ -21,15 +20,20 @@ fn main() -> BError {
     gs.ecs.register::<Viewshed>();
     gs.ecs.register::<Monster>();
     gs.ecs.register::<Name>();
+    gs.ecs.register::<BlocksTile>();
+    gs.ecs.register::<CombatStats>();
+    gs.ecs.register::<WantsToMelee>();
+    gs.ecs.register::<SufferDamage>();
 
     let map = Map::new_map_rooms_and_corridors(WIDTH, HEIGHT);
     let player_center = map.rooms[0].center();
-    gs.ecs.create_entity()
+    let player_entity = gs.ecs.create_entity()
         .with(Position { x: player_center.x, y: player_center.y })
         .with(Renderable { glyph: to_cp437('@'), fg: RGB::named(WHITE), bg: RGB::named(BLACK) })
         .with(Viewshed { visible_tiles: Vec::new(), range: 8, dirty: true })
         .with(Player {})
         .with(Name { name: "Rust勇士".to_string() })
+        .with(CombatStats{ max_hp: 30, hp: 30, defense: 2, power: 5 })
         .build();
 
     let mut rng = RandomNumberGenerator::new();
@@ -47,11 +51,16 @@ fn main() -> BError {
             .with(Viewshed { visible_tiles: Vec::new(), range: 8, dirty: true })
             .with(Monster {})
             .with(Name { name: format!("Room{}_{}", id, &name) })
+            .with(BlocksTile{})
+            .with(CombatStats{ max_hp: 16, hp: 16, defense: 1, power: 4 })
             .build();
     }
 
 
     gs.ecs.insert(map);
     gs.ecs.insert(Point::new(player_center.x, player_center.y));
+    gs.ecs.insert(player_entity);
+    gs.ecs.insert(RunState::PreRun);
+
     main_loop(ctx, gs)
 }

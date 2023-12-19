@@ -332,6 +332,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "ch08-ui"
+version = "0.1.0"
+dependencies = [
+ "bracket-lib",
+ "specs",
+]
+
+[[package]]
 name = "cmake"
 version = "0.1.50"
 source = "registry+https://github.com/rust-lang/crates.io-index"

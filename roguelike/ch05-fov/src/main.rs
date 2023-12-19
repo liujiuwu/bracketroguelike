@@ -12,7 +12,7 @@ fn main() -> BError {
     link_resource!(TILE_FONT1, "resources/sprite.png");
     link_resource!(TILE_FONT2, "resources/unicode_16x16.png");
 
-    let ctx = BTermBuilder::new()
+    let mut ctx = BTermBuilder::new()
         .with_title("Walk fov")
         .with_dimensions(WIDTH, HEIGHT)
         .with_tile_dimensions(16u32, 16u32)

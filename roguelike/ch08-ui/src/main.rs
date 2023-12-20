@@ -7,7 +7,7 @@ const HEIGHT: i32 = 50;
 
 fn main() -> BError {
     let mut ctx = BTermBuilder::simple80x50()
-        .with_tile_dimensions(16, 16)
+        //.with_tile_dimensions(16, 16)
         .with_title("Walk monster")
         .build()?;
 
@@ -31,7 +31,7 @@ fn main() -> BError {
     let player_center = map.rooms[0].center();
     let player_entity = gs.ecs.create_entity()
         .with(Position { x: player_center.x, y: player_center.y })
-        .with(Renderable { glyph: to_cp437('@'), fg: RGB::named(WHITE), bg: RGB::named(BLACK) })
+        .with(Renderable { glyph: to_cp437('@'), fg: RGB::named(YELLOW), bg: RGB::named(BLACK) })
         .with(Viewshed { visible_tiles: Vec::new(), range: 8, dirty: true })
         .with(Player {})
         .with(Name { name: "Rust".to_string() })

@@ -187,7 +187,7 @@ pub fn draw_map(ecs: &World, ctx: &mut BTerm) {
             };
 
             if !map.visible_tiles[idx] {
-                fg = RGB::named(GRAY).to_rgba(0.3);
+                fg = RGB::named(GRAY).to_rgba(0.5);
             } else {
                 for (pos, _) in (&positions, &players).join() {
                     let distance = 1.0

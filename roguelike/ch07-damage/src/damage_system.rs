@@ -1,17 +1,17 @@
-use specs::prelude::*;
 use bracket_lib::prelude::*;
+use specs::prelude::*;
+
 use super::prelude::*;
 
 pub struct DamageSystem {}
 
 impl<'a> System<'a> for DamageSystem {
-    type SystemData = ( WriteStorage<'a, CombatStats>,
-                        WriteStorage<'a, SufferDamage> );
+    type SystemData = (WriteStorage<'a, CombatStats>, WriteStorage<'a, SufferDamage>);
 
-    fn run(&mut self, data : Self::SystemData) {
+    fn run(&mut self, data: Self::SystemData) {
         let (mut stats, mut damage) = data;
 
-        for (mut stats, damage) in (&mut stats, &damage).join() {
+        for (stats, damage) in (&mut stats, &damage).join() {
             stats.hp -= damage.amount.iter().sum::<i32>();
         }
 
@@ -19,9 +19,9 @@ impl<'a> System<'a> for DamageSystem {
     }
 }
 
-pub fn delete_the_dead(ecs : &mut World) {
-    let mut dead : Vec<Entity> = Vec::new();
-    // Using a scope to make the borrow checker happy
+pub fn delete_the_dead(ecs: &mut World) {
+    let mut dead: Vec<Entity> = Vec::new();
+
     {
         let combat_stats = ecs.read_storage::<CombatStats>();
         let players = ecs.read_storage::<Player>();
@@ -31,7 +31,7 @@ pub fn delete_the_dead(ecs : &mut World) {
                 let player = players.get(entity);
                 match player {
                     None => dead.push(entity),
-                    Some(_) => log("You are dead")
+                    Some(_player) => log("You are dead")
                 }
             }
         }

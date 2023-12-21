@@ -190,9 +190,7 @@ pub fn draw_map(ecs: &World, ctx: &mut BTerm) {
                 fg = RGB::named(GRAY).to_rgba(0.3);
             } else {
                 for (pos, _) in (&positions, &players).join() {
-                    let distance = 1.0
-                        - (DistanceAlg::Pythagoras.distance2d(map_point, Point::new(pos.x, pos.y))
-                        / 10.0);
+                    let distance = 1.0 - (DistanceAlg::Pythagoras.distance2d(map_point, Point::new(pos.x, pos.y)) / 10.0);
                     fg = fg * distance;
                 }
             }
